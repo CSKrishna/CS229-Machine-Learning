@@ -1,0 +1,56 @@
+function y = lwlr(X_train, y_train, x, tau)
+%% y = lwlr(X_train, y_train, x, tau)
+
+%%% YOUR CODE HERE
+%% constants
+epsilon = 1e-5;
+ITER_MAX = 20;
+lambda = 0.0001;
+
+%% training set size = m
+m = size(X_train, 1); assert(m == size(y_train, 1))
+
+%% feature dim = n
+n = size(X_train ,2);
+
+%% compute weights w for each training example
+w = nan(m, 1);
+for i=1:m
+    assert(size(x, 1) == size(X_train(i,:)', 1))
+    w(i) = exp(-norm(x-X_train(i,:)')^2 / (2*tau^2));
+end
+
+%% optimize theta: max l(theta) using Newton's method
+theta = zeros(n, 1);
+theta_new = theta;
+
+for iter=1:ITER_MAX
+    % compute Hessian matrix
+    h = h_lr(X_train, theta);
+    D = diag(-w.*h.*(1.-h));
+    H = X_train'*D*X_train - lambda*eye(n);
+    
+    % compute grad_theta(l(theta))
+    z = w.*(y_train - h);
+    grad_l = X_train'*z  - lambda*theta;
+    
+    % update theta
+    theta_new = theta - H \ grad_l;
+    
+    % terminate condition
+    if norm(theta_new - theta, 2) < epsilon
+        theta = theta_new;
+        break
+    else
+        theta = theta_new;
+    end
+end
+assert( iter < ITER_MAX)
+
+%% output y = 1(h_theta(x) > 0.5) as the prediction
+y = h_lr(x', theta) > 0.5;
+
+return;
+
+
+

@@ -1,0 +1,55 @@
+function [clusters, centroids] = k_means(X, k)
+
+%%% YOUR CODE HERE
+%% constants
+ITER_MAX = 20;
+
+%% data set size = m
+m = size(X, 1);
+
+%% feature dim = n
+n = size(X ,2);
+
+%% k-means algorithm
+clusters_old = nan(m, 1);
+clusters = nan(m, 1);
+% clusters = zeros(m, 1);
+centroids = -1 + 2.*rand(k, n);
+
+for iter=1:ITER_MAX
+    %% terminate condition
+    if clusters_old == clusters;
+        break
+    else
+        clusters_old = clusters;
+    end
+    iter
+    
+    %% assign points to clusters
+    for i=1:m
+        dist = sum((repmat(X(i,:), k, 1) - centroids).^2, 2);
+        [dist_min index_min] = min(dist);
+        clusters(i) = index_min;
+    end
+    
+    draw_clusters(X, clusters, centroids)
+    pause(0.2)
+
+    %% update centroids of clusters
+    for c=1:k
+%         cluster_members = find(clusters_new == c);
+%         if size(cluster_members,1) > 0
+%             centroids(c,:) = sum(X(cluster_members,:)) ./ size(cluster_members,1);
+%         end
+        centroids(c,:) = mean(X(clusters == c, :));
+    end
+end
+
+%% assert( iter < ITER_MAX)
+if( iter >= ITER_MAX)
+    disp(['assert failed, iter = ' num2str(iter)])
+else
+    iter
+end
+
+return;

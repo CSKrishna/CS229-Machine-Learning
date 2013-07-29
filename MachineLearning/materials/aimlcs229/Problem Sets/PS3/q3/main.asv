@@ -1,0 +1,10 @@
+clc
+%% constants
+lambda = 0.001; %[0.001:10]
+
+%% load data
+[X,y,theta_true] = load_data();
+
+%% run test
+disp('main')
+theta = l1ls(X,y,lambda)

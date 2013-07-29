@@ -1,0 +1,20 @@
+clc
+clear
+format compact
+%% constants
+
+
+%% load data
+% [X_ica, X_pca] = load_images;
+X_pca = load_images;
+%X_pca = X_pca(:,1:4640);
+
+%% run PCA test
+U = pca(X_pca);
+% plot_pca_filters(U)
+
+%% run ICA test
+% ica(X_ica);
+
+%% print output
+disp('main:')

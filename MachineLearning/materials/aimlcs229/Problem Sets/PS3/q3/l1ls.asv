@@ -1,0 +1,54 @@
+function theta = l1l2(X,y,lambda)
+%% theta = l1l2(X,y,lambda)
+
+%%% YOUR CODE HERE
+%% constants
+epsilon = 1e-5;
+ITER_MAX = 200;
+
+%% training set size = m
+m = size(X, 1);
+assert(m == size(y, 1))
+
+%% feature dim = n
+n = size(X ,2);
+
+%% optimize theta: min J(theta) using coordinate descent algorithm
+theta = randn(n, 1);
+theta_new = theta;
+
+for iter=1:ITER_MAX
+    for j=1:n
+        theta_bar = theta_new;
+        theta_bar(j) = 0;
+        X_j = X(:,j);
+        % coordinate descent algorithm
+        % if sign(theta(j)) == 1
+        theta_j(1) = max(((y - X*theta_bar)'*X_j - lambda)/(X_j'*X_j), 0);
+        obj(1) = 0.5*norm(X*theta_new - y)^2 + lambda*norm(theta_new, 1);
+        % if sign(theta(j)) == -1
+        theta_j(2) = min(((y - X*theta_bar)'*X_j + lambda)/(X_j'*X_j), 0);
+        obj(2) = 0.5*norm(X*theta_new - y)^2 + lambda*norm(theta_new, 1);
+        
+        % choose the min. object value
+        [obj_min, index_min] = min(obj)
+        theta_new(j) = theta_j(index_min)
+    end
+    
+    if norm(theta_new - theta, 2) < epsilon
+        theta = theta_new;
+        break
+    else
+        theta = theta_new;
+    end
+end
+% assert( iter < ITER_MAX)
+if( iter >= ITER_MAX)
+    disp('assert failed')
+else
+    iter
+end
+
+%% output theta
+return;
+    
