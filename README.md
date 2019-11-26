@@ -14,7 +14,7 @@ CS229-Machine-Learning / MachineLearning / materials / aimlcs229 / YaoYaoNotes /
 is my notes about this video course.
 
 
-Course material contents：
+# Course material contents
 
 ## supervised learning
 
