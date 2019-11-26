@@ -16,7 +16,7 @@ is my notes about this video course.
 
 Course material contents：
 
-supervised learning
+## supervised learning
 
 Lecture 1
 
@@ -52,7 +52,8 @@ Lecture 8
 
 Mercer theorem, L1-norm soft margin SVM, convergence criteria, coordinate ascent, SMO algorithm
 
-learning theory
+## learning theory
+
 Lecture 9
 
 underfit/overfit, bias/variance, training error/generalization error, Hoeffding inequality, central limit theorem(CLT), uniform convergence, sample complexity bound/error bound
@@ -65,7 +66,8 @@ Lecture 11
 
 Frequentist/Bayesian, online learning, SGD, perceptron algorithm, "advice for applying machine learning"
 
-unsupervised learning
+## unsupervised learning
+
 Lecture 12
 
 k-means algorithm, density estimation, expectation-maximization(EM) algorithm, Jensen's inequality
@@ -82,7 +84,8 @@ Lecture 15
 
 latent sematic indexing(LSI), SVD, independent component analysis(ICA), "cocktail party"
 
-reinforcement learning
+## reinforcement learning
+
 Lecture 16
 
 Markov decision process(MDP), Bellman's equations, value iteration, policy iteration
